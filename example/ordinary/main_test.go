@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/jsam/redismock/v8"
+	"github.com/jsam/redismock"
 )
 
 func TestItemCacheFail(t *testing.T) {

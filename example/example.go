@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/jsam/redismock/v8"
+	"github.com/jsam/redismock"
 )
 
 var _ = example
