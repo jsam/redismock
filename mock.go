@@ -52,7 +52,11 @@ func newMock(clientType int) *mock {
 	// MaxRetries/MaxRedirects set -2, avoid executing commands on the redis server
 	switch clientType {
 	case redisClient:
-		opt := &redis.Options{MaxRetries: -2}
+		opt := &redis.Options{
+			MaxRetries:         -2,
+			IdleCheckFrequency: -1,
+			IdleTimeout:        -1,
+		}
 		m.factory = redis.NewClient(opt)
 		client := redis.NewClient(opt)
 		client.AddHook(redisClientHook{fn: m.process})
@@ -257,7 +261,9 @@ func (m *mock) compare(isRegexp bool, expect, cmd interface{}) error {
 
 // using map in command leads to disorder, change the command parameter to map[string]interface{}
 // for example:
+//
 //	[mset key1 value1 key2 value2] => [mset map[string]interface{}{"key1": "value1", "key2": "value2"}]
+//
 // return bool, is it handled
 func (m *mock) mapArgs(cmd string, cmdArgs *[]interface{}) bool {
 	var cut int
