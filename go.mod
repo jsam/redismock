@@ -1,4 +1,4 @@
-module github.com/jsam/redismock/v8
+module github.com/jsam/redismock
 
 go 1.19
 
